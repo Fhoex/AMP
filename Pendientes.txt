@@ -10,7 +10,7 @@ R4.- adjunte las cotizaciones sobre los proveedores::30min
 R5.- Cuando está aprobado un proceso debe ser factible de anularse:::15min::Consultar	
 R6.- Comunicar al ganador en caso de anulación de concurso::15min
 R7.- en caso de anulación se comunica al proveedor en caso de anulación o rechazo::15min	
-?8.- Agregar control de fecha válida de cotización (fecha desde BD, 60 días)	
+?8.- Agregar control de fecha válida de cotización (la cotización puede durar hasta 60 día y debe ser entre L-V)
 X9.- verificar si la aprobación de axentria (GG a Aprobado) puede incidir en una aprobación automática en el speed.
 10.- Validar el ingreso del Nro de OC, sea 100% correcto, esto se puede validar en el speed si se ingresa el Nro Instancia:::45min-1h::Espera de resuesta de sistemas:
 11.- el comentario se debe precisar (servicio)::15min
@@ -23,7 +23,7 @@ X15.- Jose Narvarter cotización de Bienes y servicios combinados.
 R16.- Fecha de entrega o ejecución::15min	
 17.- administración puede archivar:::Consultar::35min
 18.- La validación de administaración por montos reducibles (conversación)	
-?19.- referencias	
+X19.- referencias (agregar documentos por cada ítem, repetido)
 R20.- adjuntar documentos por cada ítem (opcional):::45min	
 X21.- cotizaciones recibe los correos (correo con tarea para enviar correo automático hacia el comprador)	
 22.- administrador permite adquirir cualquier tipo de proveedor en el tiempo que se requiera (realizar)	
@@ -36,22 +36,17 @@ X28.- TI consultar Google Apps para crear formulario
 ?29.- Ordenes de compra por consumibles, activos y servicios	
 ?30.- Código de productos y servicios:	
 ?31.- Se rechaza a persona que genera la OC /Comprador	
-32.- Se validan tres documentos: Factura, OC (tres firmas), Acta validada por el cliente::ok	
+R32.- Se validan tres documentos: Factura, OC (tres firmas), Acta validada por el cliente::ok	
 ?33.- Código C#### / A####	
 ?34.- homogenizar valores en monedas	
-35.- Creación de nuevo proveedor:::10min	
-.	Local
-.	a Envie a proveedor (Excel)
-.	a Copia a comprador (Excel)
-.	Extranjero
-.	a Envie a proveedor (Excel)
-.	a Copia a comprador
-.	b comprador llena (Excel)
+35.- Creación de nuevo proveedor:::(cliente debe facilitar los archivos):::10min
+	Local
+	Extranjero
 36.- Culminar el diseño del Excel para registro de proveedor Local y Extranjero:::consultar	
 37.- Servicio sujeto a tarifario pasa directamente a la generación de la OC:::
 X38.- Adelanto de pago resaltar el MENOR VALOR de pago	
 ?39.- Se debe enviar un correo luego de GerenciaGeneral	
-?40.- Carlos: ver un tema de flujo de modificación de metadata usuario > admin > usuario	
+X40.- Carlos: ver un tema de flujo de modificación de metadata usuario > admin > usuario	
 
 Correcciones	
 1.- Bloquear el campo OC:::10min	
