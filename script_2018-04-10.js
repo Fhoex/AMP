@@ -10,7 +10,7 @@ for (i = 1; i < 7; i++) {
 		__EFGetElementByEFFieldName('User_' + i).value = '';
 	}
 }
-
+//Comment
 // ----------------------------Carga de aprobador/rechazador -----------------------------------------------------------------------------
 for (i = 3; i < 14; i++) {
 	if ('[STATENAME]' == Estado[i - 3]) {
