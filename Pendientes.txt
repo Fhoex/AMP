@@ -4,12 +4,12 @@ WF01
 Desarrollo
 
 1.- Se requiere la lista de motivos que abarque la elección de proveedor único:::Pedir al cliente::10min	
-2.- Se requiere la lista de reglas que se envían a los proveedores:::Pedir al cliente::10min
+R2.- Se requiere la lista de reglas que se envían a los proveedores:::Pedir al cliente::10min
 X3.- Solo se aceptará la cotización recibida del mismo correo o dominio invitado.	
-4.- adjunte las cotizaciones sobre los proveedores::30min
-5.- Cuando está aprobado un proceso debe ser factible de anularse:::15min::Consultar	
-6.- Comunicar al ganador en caso de anulación de concurso::15min
-7.- en caso de anulación se comunica al proveedor en caso de anulación o rechazo::15min	
+R4.- adjunte las cotizaciones sobre los proveedores::30min
+R5.- Cuando está aprobado un proceso debe ser factible de anularse:::15min::Consultar	
+R6.- Comunicar al ganador en caso de anulación de concurso::15min
+R7.- en caso de anulación se comunica al proveedor en caso de anulación o rechazo::15min	
 ?8.- Agregar control de fecha válida de cotización (fecha desde BD, 60 días)	
 X9.- verificar si la aprobación de axentria (GG a Aprobado) puede incidir en una aprobación automática en el speed.
 10.- Validar el ingreso del Nro de OC, sea 100% correcto, esto se puede validar en el speed si se ingresa el Nro Instancia:::45min-1h::Espera de resuesta de sistemas:
@@ -20,18 +20,18 @@ X14.- retener los procesos en control financiero como grupo
 	comprador, aprobadores, controlFinanciero, Administración y AF y GG
 	comprador, control, comprador, administración, AF, GG
 X15.- Jose Narvarter cotización de Bienes y servicios combinados.
-16.- Fecha de entrega o ejecución::15min	
+R16.- Fecha de entrega o ejecución::15min	
 17.- administración puede archivar:::Consultar::35min
 18.- La validación de administaración por montos reducibles (conversación)	
 ?19.- referencias	
-20.- adjuntar documentos por cada ítem (opcional):::45min	
+R20.- adjuntar documentos por cada ítem (opcional):::45min	
 X21.- cotizaciones recibe los correos (correo con tarea para enviar correo automático hacia el comprador)	
 22.- administrador permite adquirir cualquier tipo de proveedor en el tiempo que se requiera (realizar)	
 X23.- Agregar en la tabla Proveedores, nombre de contacto.	
 24.- Revisar campo de regla, aparece un check en blanco	
-25.- el logo no se está mostrando en el correo enviado a los proveedores	
-26.- 7101 + anexo desde SQL:::15min---Realizar
-27.- El comentario agregarlo al final de las condiciones de cotización como Condiciones especiales:ok
+R25.- el logo no se está mostrando en el correo enviado a los proveedores	
+R26.- 7101 + anexo desde SQL:::15min---Realizar
+R27.- El comentario agregarlo al final de las condiciones de cotización como Condiciones especiales:ok
 X28.- TI consultar Google Apps para crear formulario	
 ?29.- Ordenes de compra por consumibles, activos y servicios	
 ?30.- Código de productos y servicios:	
