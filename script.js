@@ -170,6 +170,17 @@ if ('[STATENAME]' != 'Comprador' && '[STATENAME]' != 'ADMComprador') {
 	}
 }
 
+// ---------------------------- Solicitud de locación ---------------------------------------------------------------------
+
+if(__EFGetElementByEFFieldName("PurchaseType").value == "1"){
+	__EFGetElementByEFFieldName("Delivery").value = "Av. San Andrés 6100, Urb. Industrial Molitalia, Los Olivos.";
+//https://goo.gl/maps/o15DoWLCPg62
+}
+
+if(__EFGetElementByEFFieldName("PurchaseType").value != "1"){
+	__EFGetElementByEFFieldName("Delivery").value = "";
+}
+
 // ----------------------------Llamado a funciones  ------------------------------------------------------------------------------
 
 // ----------------------------Concatenación de reglas ---------------------------------------------------------------------
@@ -405,34 +416,35 @@ function Process(A) {
 function WinnerSelect(A) {
 	__EFGetElementByEFFieldName('WinnerMail').value = __EFGetElementByEFFieldName('ProvC4F_' + A).value;
 }
-	function CaptureProvider()
-	{
+
+function CaptureProvider(){
 	var ProvidrUniq = __EFGetElementByEFFieldName("UniqueProvider");
-		if(ProvidrUniq[0].checked){
-			__EFGetElementByEFFieldName("EtiqProvider1").value = "SI";
-		}
-		if(ProvidrUniq[1].checked){
-			__EFGetElementByEFFieldName("EtiqProvider1").value = "NO";
-		}
+	if(ProvidrUniq[0].checked){
+		__EFGetElementByEFFieldName("EtiqProvider1").value = "SI";
 	}
-	function CaptureLBL(){
+	if(ProvidrUniq[1].checked){
+		__EFGetElementByEFFieldName("EtiqProvider1").value = "NO";
+	}
+}
+
+function CaptureLBL(){
 	var comboLbl1 = __EFGetElementByEFFieldName("Presupuesto");
 	var posLbl1 = comboLbl1.selectedIndex;
 	var comboLbl2 = __EFGetElementByEFFieldName("SelectProject");
 	var posLbl2 = comboLbl2.selectedIndex;
 	var comboLbl3 = __EFGetElementByEFFieldName("PurchaseType");
 	var posLbl3 = comboLbl3.selectedIndex;
-		__EFGetElementByEFFieldName("EtiqPresupuesto").value = comboLbl1[posLbl1].text;
-		__EFGetElementByEFFieldName("EtiqProyect").value = comboLbl2[posLbl2].text;
-		__EFGetElementByEFFieldName("EtiqType").value = comboLbl3[posLbl3].text;
-	}
-	function CaptureEnlarge()
-	{
+	__EFGetElementByEFFieldName("EtiqPresupuesto").value = comboLbl1[posLbl1].text;
+	__EFGetElementByEFFieldName("EtiqProyect").value = comboLbl2[posLbl2].text;
+	__EFGetElementByEFFieldName("EtiqType").value = comboLbl3[posLbl3].text;
+}
+
+function CaptureEnlarge(){
 	var FchaEnlarge = __EFGetElementByEFFieldName("Enlarge");
-		if(FchaEnlarge[0].checked){
-			__EFGetElementByEFFieldName("EtiqEnlarge").value = "SI";
-		}
-		if(FchaEnlarge[1].checked){
-			__EFGetElementByEFFieldName("EtiqEnlarge").value = "NO";
-		}
+	if(FchaEnlarge[0].checked){
+		__EFGetElementByEFFieldName("EtiqEnlarge").value = "SI";
 	}
+	if(FchaEnlarge[1].checked){
+		__EFGetElementByEFFieldName("EtiqEnlarge").value = "NO";
+	}
+}
