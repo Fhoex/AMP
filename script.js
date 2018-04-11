@@ -10,7 +10,7 @@ for (i = 1; i < 7; i++) {
 		__EFGetElementByEFFieldName('User_' + i).value = '';
 	}
 }
-//Comment
+
 // ----------------------------Carga de aprobador/rechazador -----------------------------------------------------------------------------
 for (i = 3; i < 14; i++) {
 	if ('[STATENAME]' == Estado[i - 3]) {
@@ -193,7 +193,7 @@ function CollectorRules() {
 			}
 		}
 	}
-	__EFGetElementByEFFieldName('CheckTotal').value = '<table><tbody>' + incoterm + acumulado + '<tr><td width=\'20\'></td><td><li></li></td><td style=\'text-align:left;vertical-align:top;padding:0\'>La fecha de entrega o ejecución debe ser el [FORM:date_3]</td></tr></tbody></table>';
+        __EFGetElementByEFFieldName('CheckTotal').value = '<table><tbody>' + incoterm + acumulado + '<tr><td width=\'20\'></td><td><li></li></td><td style=\'text-align:left;vertical-align:top;padding:0\'>La fecha de entrega o ejecución debe ser el [FORM:date_3]</td></tr></tbody></table>';
 }
 
 // ----------------------------Acciones de Presupuesto -----------------------------------------
@@ -405,36 +405,34 @@ function Process(A) {
 function WinnerSelect(A) {
 	__EFGetElementByEFFieldName('WinnerMail').value = __EFGetElementByEFFieldName('ProvC4F_' + A).value;
 }
-//-----------------------Capturar texto de la etiqueta----------
-function CaptureLBL()
-{
-var comboLbl1 = __EFGetElementByEFFieldName("Presupuesto");
-var posLbl1 = comboLbl1.selectedIndex;
-var comboLbl2 = __EFGetElementByEFFieldName("SelectProject");
-var posLbl2 = comboLbl2.selectedIndex;
-var comboLbl3 = __EFGetElementByEFFieldName("PurchaseType");
-var posLbl3 = comboLbl3.selectedIndex;
-	__EFGetElementByEFFieldName("EtiqPresupuesto").value = comboLbl1[posLbl1].text;
-	__EFGetElementByEFFieldName("EtiqProyect").value = comboLbl2[posLbl2].text;
-	__EFGetElementByEFFieldName("EtiqType").value = comboLbl3[posLbl3].text;
-}
-function CaptureProvider()
-{
-var ProvidrUniq = __EFGetElementByEFFieldName("UniqueProvider");
-	if(ProvidrUniq[0].checked){
-		__EFGetElementByEFFieldName("EtiqProvider1").value = "SI";
+	function CaptureProvider()
+	{
+	var ProvidrUniq = __EFGetElementByEFFieldName("UniqueProvider");
+		if(ProvidrUniq[0].checked){
+			__EFGetElementByEFFieldName("EtiqProvider1").value = "SI";
+		}
+		if(ProvidrUniq[1].checked){
+			__EFGetElementByEFFieldName("EtiqProvider1").value = "NO";
+		}
 	}
-	if(ProvidrUniq[1].checked){
-		__EFGetElementByEFFieldName("EtiqProvider1").value = "NO";
+	function CaptureLBL(){
+	var comboLbl1 = __EFGetElementByEFFieldName("Presupuesto");
+	var posLbl1 = comboLbl1.selectedIndex;
+	var comboLbl2 = __EFGetElementByEFFieldName("SelectProject");
+	var posLbl2 = comboLbl2.selectedIndex;
+	var comboLbl3 = __EFGetElementByEFFieldName("PurchaseType");
+	var posLbl3 = comboLbl3.selectedIndex;
+		__EFGetElementByEFFieldName("EtiqPresupuesto").value = comboLbl1[posLbl1].text;
+		__EFGetElementByEFFieldName("EtiqProyect").value = comboLbl2[posLbl2].text;
+		__EFGetElementByEFFieldName("EtiqType").value = comboLbl3[posLbl3].text;
 	}
-}
-function CaptureEnlarge()
-{
-var FchaEnlarge = __EFGetElementByEFFieldName("Enlarge");
-	if(FchaEnlarge[0].checked){
-		__EFGetElementByEFFieldName("EtiqEnlarge").value = "SI";
+	function CaptureEnlarge()
+	{
+	var FchaEnlarge = __EFGetElementByEFFieldName("Enlarge");
+		if(FchaEnlarge[0].checked){
+			__EFGetElementByEFFieldName("EtiqEnlarge").value = "SI";
+		}
+		if(FchaEnlarge[1].checked){
+			__EFGetElementByEFFieldName("EtiqEnlarge").value = "NO";
+		}
 	}
-	if(FchaEnlarge[1].checked){
-		__EFGetElementByEFFieldName("EtiqEnlarge").value = "NO";
-	}
-}
