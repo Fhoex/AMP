@@ -126,7 +126,7 @@ BEGIN
 
 	IF @NroConsulta = '7'
 	BEGIN
-		SELECT RuleDetail FROM Reglas WHERE Tipo = 1
+		SELECT RuleDetail FROM Reglas WHERE Tipo = 3 ORDER BY RuleDetail ASC
 	END
 
 	IF @NroConsulta = '8'

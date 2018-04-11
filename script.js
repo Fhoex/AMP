@@ -52,8 +52,6 @@ if ('[STATENAME]' == 'Comprador' || '[STATENAME]' == 'ADMComprador') {
 	}
 	x = 0;
 	CollectorRules();
-	//CollectorProducts();
-	//CollectorProviders();
 }
 
 if ('[STATENAME]' != 'Comprador' && '[STATENAME]' != 'ADMComprador') {
