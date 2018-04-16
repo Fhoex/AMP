@@ -1,6 +1,7 @@
 SET ANSI_NULLS ON
 GO
-
+SET ANSI_NULLS ON
+GO
 ALTER PROCEDURE [dbo].[ProcedureWF01]
 
 @TipoConsulta VARCHAR(2),
@@ -99,7 +100,12 @@ BEGIN
 
 	IF @NroConsulta = '2'
 	BEGIN
+		--SELECT ProjectCode ,(LTRIM(RTRIM(ProjectCode)) + ' - ' + LTRIM(RTRIM(ProjectDescription))) AS Proyecto FROM Proyectos
 		SELECT ProjectCode ,(LTRIM(RTRIM(ProjectCode)) + ' - ' + LTRIM(RTRIM(ProjectDescription))) AS Proyecto FROM Proyectos
+		WHERE (
+				ProjectCode LIKE '%' + @Variable1 + '%'
+				OR ProjectDescription LIKE '%' + @Variable1 + '%'
+				)
 	END
 
 	IF @NroConsulta = '3'
@@ -110,7 +116,7 @@ BEGIN
 
 	IF @NroConsulta = '4'
 	BEGIN
-		SELECT RuleDetail FROM Reglas WHERE Tipo > 1
+		SELECT RuleDetail FROM Reglas WHERE Tipo = 2
 		ORDER BY Tipo ASC
 	END
 
@@ -132,6 +138,10 @@ BEGIN
 	IF @NroConsulta = '8'
 	BEGIN
 		SELECT Usuario, Nombre FROM [dbo].[Users] WHERE CentroCosto = '1'
+	END
+	IF @NroConsulta = '9'
+	BEGIN
+		SELECT 'mzuniga' AS UserDelegate
 	END
 END
 GO

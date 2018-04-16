@@ -171,13 +171,16 @@ if ('[STATENAME]' != 'Comprador' && '[STATENAME]' != 'ADMComprador') {
 // ---------------------------- Solicitud de locación ---------------------------------------------------------------------
 
 if(__EFGetElementByEFFieldName("PurchaseType").value == "1"){
-	__EFGetElementByEFFieldName("Delivery").value = "Av. San Andrés 6100, Urb. Industrial Molitalia, Los Olivos.";
-//https://goo.gl/maps/o15DoWLCPg62
+	if(__EFGetElementByEFFieldName("Delivery").value == ""){
+		__EFGetElementByEFFieldName("Delivery").value = "Av. San Andrés 6100, Urb. Industrial Molitalia, Los Olivos.";
+		//https://goo.gl/maps/o15DoWLCPg62
+	}
 }
-
-if(__EFGetElementByEFFieldName("PurchaseType").value != "1"){
+else{
 	__EFGetElementByEFFieldName("Delivery").value = "";
 }
+
+// ---------------------------- Validación de etiquetas ---------------------------------------------------------------------
 
 var ProvidrUniq = __EFGetElementByEFFieldName("UniqueProvider");
 var FchaEnlarge = __EFGetElementByEFFieldName("Enlarge");
@@ -203,6 +206,16 @@ if(FchaEnlarge[1].checked){
 	__EFGetElementByEFFieldName("EtiqPresupuesto").value = comboLbl1[posLbl1].text;
 	__EFGetElementByEFFieldName("EtiqProyect").value = comboLbl2[posLbl2].text;
 	__EFGetElementByEFFieldName("EtiqType").value = comboLbl3[posLbl3].text;
+}
+
+// ---------------------------- Extracción de nombre de OC ---------------------------------------------------------------------
+
+if ('[STATENAME]' == 'Cotización' || '[STATENAME]' == 'SubgerenciaADM' || __EFGetElementByEFFieldName('PurchaseType').value == "3"){
+	var fu1 = '[FORM:file_1]';
+	var oc = __EFGetElementByEFFieldName('OC').value;
+	if(fu1 != "" && oc == ""){
+		__EFGetElementByEFFieldName('OC').value = /[0-9]{10}/.exec(fu1);
+	}
 }
 
 // ----------------------------Llamado a funciones  ------------------------------------------------------------------------------
@@ -440,3 +453,5 @@ function Process(A) {
 function WinnerSelect(A) {
 	__EFGetElementByEFFieldName('WinnerMail').value = __EFGetElementByEFFieldName('ProvC4F_' + A).value;
 }
+
+//alert("fin");
