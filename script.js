@@ -1,7 +1,7 @@
-//----------------------------- Usuarios del flujo-----------------------------------------------------------------------
-var Estado = ['Comprador', 'ADMAsignacion','ADMComprador', 'Cotizacion', 'CotizacionAmpliada', 'Jefatura', 'Subgerencia', 'SubgerenciaADM', 'Gerencia', 'GerenciaAF', 'GerenciaGeneral'];
+//---------- Usuarios del flujo-----------------------------------------------------------------------
+var Estado = ['ADMAsignacion', 'ADMComprador', 'Cotizacion', 'CotizacionAmpliada', 'Comprador', 'Jefatura', 'Subgerencia', 'SubgerenciaADM', 'Gerencia', 'GerenciaAF', 'GerenciaGeneral'];
 
-// ----------------------------Carga de usuarios -----------------------------------------------------------------------------------------
+//---------- Carga de usuarios -----------------------------------------------------------------------------------------
 for (i = 1; i < 7; i++) {
 	var combo = __EFGetElementByEFFieldName('SQLUser_' + i);
 	if (combo.length > 1) {
@@ -11,19 +11,16 @@ for (i = 1; i < 7; i++) {
 	}
 }
 
-// ----------------------------Carga de aprobador/rechazador -----------------------------------------------------------------------------
-for (i = 3; i < 14; i++) {
-	if ('[STATENAME]' == Estado[i - 3]) {
-		if (i == 3 || i == 4 || i == 5 || i == 6) {
-			i = 7;
-		}
-		for (j = i - 6; j < 7; j++) {
+//---------- Carga de aprobador/rechazador -----------------------------------------------------------------------------
+for (i = 4; i < 11; i++) {
+	if ('[STATENAME]' == Estado[i]) {
+		for (j = i - 3 ; j < 7; j++) {
 			if (__EFGetElementByEFFieldName('User_' + j).value != '') {
 				__EFGetElementByEFFieldName('Aprobador').value = __EFGetElementByEFFieldName('User_' + j).value;
 				j = 7;
 			}
 		}
-		for (k = i - 8; k > 0; k--) {
+		for (k = i - 5; k > 0; k--) {
 			if (__EFGetElementByEFFieldName('User_' + k).value != '') {
 				__EFGetElementByEFFieldName('Rechazador').value = __EFGetElementByEFFieldName('User_' + k).value;
 				k = 0;
@@ -32,7 +29,7 @@ for (i = 3; i < 14; i++) {
 	}
 }
 
-// ----------------------------Cambio de usuario -----------------------------------------------------------------------------------------	
+//---------- Cambio de usuario -----------------------------------------------------------------------------------------	
 if ('[STATENAME]' == 'Comprador'){
 	if (__EFGetElementByEFFieldName('Owner').value == '') {
 		__EFGetElementByEFFieldName('BuyerUser').value = '[USERNAME]';
@@ -42,7 +39,7 @@ if ('[STATENAME]' == 'Comprador'){
 }
 
 if ('[STATENAME]' == 'Comprador' || '[STATENAME]' == 'ADMComprador') {
-	// ----------------------------Llenado de Checkbox --------------------------------------------------------------------------------------
+//---------- Llenado de Checkbox --------------------------------------------------------------------------------------
 	var x;
 	if (x === undefined) {
 		var lista = __EFGetElementByEFFieldName('Checkbox_2');
@@ -55,7 +52,7 @@ if ('[STATENAME]' == 'Comprador' || '[STATENAME]' == 'ADMComprador') {
 }
 
 if ('[STATENAME]' != 'Comprador' && '[STATENAME]' != 'ADMComprador') {
-	// ----------------------------Llenado de HTML productos  ------------------------------------------------------------------------------
+//---------- Llenado de HTML productos  ------------------------------------------------------------------------------
 	for (i = 1; i < 6; i++) {
 		cadena = __EFGetElementByEFFieldName('ProdC2F_' + i).value;
 		if ('[STATENAME]' == 'Cotizacion' || '[STATENAME]' == 'CotizacionAmpliada') {
@@ -76,7 +73,8 @@ if ('[STATENAME]' != 'Comprador' && '[STATENAME]' != 'ADMComprador') {
 			document.getElementById('prod2_' + i).innerHTML = cadena.slice(0, 30) + '..';
 		}
 	}
-	// ----------------------------Llenado de HTML proveedores  ------------------------------------------------------------------------------
+
+//---------- Llenado de HTML proveedores  ------------------------------------------------------------------------------
 	for (i = 1; i < 6; i++) {
 		cadena = __EFGetElementByEFFieldName('ProvC2F_' + i).value;
 		if ('[STATENAME]' == 'Cotizacion' || '[STATENAME]' == 'CotizacionAmpliada') {
@@ -94,7 +92,7 @@ if ('[STATENAME]' != 'Comprador' && '[STATENAME]' != 'ADMComprador') {
 			document.getElementById('prov2_' + i).innerHTML = cadena.slice(0, 12) + '..';
 		}
 	}
-	// ----------------------------Llenado de HTML de Analisis ------------------------------------------------------------------------------
+//---------- Llenado de HTML de Analisis ------------------------------------------------------------------------------
 	if (__EFGetElementByEFFieldName('analysis').value == '1') {
 		cambio = __EFGetElementByEFFieldName('cambio').value.replace(',', '.');
 		var Total = new Array();
@@ -139,12 +137,8 @@ if ('[STATENAME]' != 'Comprador' && '[STATENAME]' != 'ADMComprador') {
 					}
 				}
 			}
-			var min = Math.min.apply(null, Analisis.filter(function (n) {
-				return !isNaN(n);
-			}));
-			var max = Math.max.apply(null, Analisis.filter(function (n) {
-				return !isNaN(n);
-			}));
+			var min = Math.min.apply(null, Analisis.filter(function (n) {return !isNaN(n);}));
+			var max = Math.max.apply(null, Analisis.filter(function (n) {return !isNaN(n);}));
 			if (i != 7) {
 				comparar = min;
 			} else {
@@ -168,8 +162,7 @@ if ('[STATENAME]' != 'Comprador' && '[STATENAME]' != 'ADMComprador') {
 	}
 }
 
-// ---------------------------- Solicitud de locación ---------------------------------------------------------------------
-
+//---------- Solicitud de locación ---------------------------------------------------------------------
 if(__EFGetElementByEFFieldName("PurchaseType").value == "1"){
 	if(__EFGetElementByEFFieldName("Delivery").value == ""){
 		__EFGetElementByEFFieldName("Delivery").value = "Av. San Andrés 6100, Urb. Industrial Molitalia, Los Olivos.";
@@ -177,11 +170,10 @@ if(__EFGetElementByEFFieldName("PurchaseType").value == "1"){
 	}
 }
 else{
-	__EFGetElementByEFFieldName("Delivery").value = "";
+__EFGetElementByEFFieldName("Delivery").value = "";
 }
 
-// ---------------------------- Validación de etiquetas ---------------------------------------------------------------------
-
+//---------- Validación de etiquetas ---------------------------------------------------------------------
 var ProvidrUniq = __EFGetElementByEFFieldName("UniqueProvider");
 var FchaEnlarge = __EFGetElementByEFFieldName("Enlarge");
 var comboLbl1 = __EFGetElementByEFFieldName("Presupuesto");
@@ -192,24 +184,22 @@ var posLbl2 = comboLbl2.selectedIndex;
 var posLbl3 = comboLbl3.selectedIndex;
 
 if(ProvidrUniq[0].checked){
-	__EFGetElementByEFFieldName("EtiqProvider1").value = "SI";
+__EFGetElementByEFFieldName("EtiqProvider1").value = "SI";
 }
 if(ProvidrUniq[1].checked){
-	__EFGetElementByEFFieldName("EtiqProvider1").value = "NO";
+__EFGetElementByEFFieldName("EtiqProvider1").value = "NO";
 }
-
 if(FchaEnlarge[0].checked){
-	__EFGetElementByEFFieldName("EtiqEnlarge").value = "SI";
+__EFGetElementByEFFieldName("EtiqEnlarge").value = "SI";
 }
 if(FchaEnlarge[1].checked){
-	__EFGetElementByEFFieldName("EtiqEnlarge").value = "NO";
-	__EFGetElementByEFFieldName("EtiqPresupuesto").value = comboLbl1[posLbl1].text;
-	__EFGetElementByEFFieldName("EtiqProyect").value = comboLbl2[posLbl2].text;
-	__EFGetElementByEFFieldName("EtiqType").value = comboLbl3[posLbl3].text;
+__EFGetElementByEFFieldName("EtiqEnlarge").value = "NO";
+__EFGetElementByEFFieldName("EtiqPresupuesto").value = comboLbl1[posLbl1].text;
+__EFGetElementByEFFieldName("EtiqProyect").value = comboLbl2[posLbl2].text;
+__EFGetElementByEFFieldName("EtiqType").value = comboLbl3[posLbl3].text;
 }
 
-// ---------------------------- Extracción de nombre de OC ---------------------------------------------------------------------
-
+//---------- Extracción de nombre de OC ---------------------------------------------------------------------
 if ('[STATENAME]' == 'Cotización' || '[STATENAME]' == 'SubgerenciaADM' || __EFGetElementByEFFieldName('PurchaseType').value == "3"){
 	var fu1 = '[FORM:file_1]';
 	var oc = __EFGetElementByEFFieldName('OC').value;
@@ -218,9 +208,9 @@ if ('[STATENAME]' == 'Cotización' || '[STATENAME]' == 'SubgerenciaADM' || __EFG
 	}
 }
 
-// ----------------------------Llamado a funciones  ------------------------------------------------------------------------------
+//---------- Llamado a funciones  ------------------------------------------------------------------------------
 
-// ----------------------------Concatenación de reglas ---------------------------------------------------------------------
+//---------- Concatenación de reglas ---------------------------------------------------------------------
 function CollectorRules() {
 	var labels = document.getElementsByTagName('LABEL');
 	var inputs = document.getElementsByTagName('INPUT');
@@ -241,10 +231,10 @@ function CollectorRules() {
 			}
 		}
 	}
-        __EFGetElementByEFFieldName('CheckTotal').value = '<table><tbody>' + incoterm + acumulado + '<tr><td width=\'20\'></td><td><li></li></td><td style=\'text-align:left;vertical-align:top;padding:0\'>La fecha de entrega o ejecución debe ser el [FORM:date_3]</td></tr></tbody></table>';
+	__EFGetElementByEFFieldName('CheckTotal').value = '<table><tbody>' + incoterm + acumulado + '<tr><td width=\'20\'></td><td><li></li></td><td style=\'text-align:left;vertical-align:top;padding:0\'>La fecha de entrega o ejecución debe ser el [FORM:date_3]</td></tr></tbody></table>';
 }
 
-// ----------------------------Acciones de Presupuesto -----------------------------------------
+//---------- Acciones de Presupuesto -----------------------------------------
 function Presupuesto(C) {
 	if('[FORM:UniqueProvider]' == 2 && '[FORM:Delegate]' == 2){
 		if (C == 1) {
@@ -259,13 +249,13 @@ function Presupuesto(C) {
 	}
 }
 
-// ----------------------------Restablecimiento de usuario propietario ---------------------------------------------
+//---------- Restablecimiento de usuario propietario ---------------------------------------------
 function ResetBuyer() {
 	__EFGetElementByEFFieldName('BuyerUser').value = '[USERNAME]';
 	__EFGetElementByEFFieldName('Owner').value = '';
 }
 
-// ----------------------------Acciones de productos ------------------------------------------------------------------
+//---------- Acciones de productos ------------------------------------------------------------------
 function AddRowProduct() {
 	var i, j, k = 0;
 	var B = new Array(5);
@@ -296,7 +286,7 @@ function DelRowProduct(B) {
 	}
 }
 
-// ----------------------------Concatenación de productos ---------------------------------------------------------------------
+//---------- Concatenación de productos ---------------------------------------------------------------------
 function CollectorProducts() {
 	var salida = '';
 	var acumulado = '';
@@ -317,7 +307,7 @@ function CollectorProducts() {
 	__EFGetElementByEFFieldName('CollectProducts').value = '<table><tbody>' + salida + '</tbody></table>';
 }
 
-// ----------------------------Acciones de Proveedores --------------------------------------------------------------
+//---------- Acciones de Proveedores --------------------------------------------------------------
 function AddRowProvider() {
 	var i, j, k = 0;
 	var B = new Array(5);
@@ -348,7 +338,7 @@ function DelRowProvider(B) {
 	}
 }
 
-// ----------------------------Concatenación de proveedores ---------------------------------------------------------------------
+//---------- Concatenación de proveedores ---------------------------------------------------------------------
 function CollectorProviders() {
 	var salida = '';
 	var acumulado = '';
@@ -369,12 +359,12 @@ function CollectorProviders() {
 	__EFGetElementByEFFieldName('CollectProviders').value = '<table><tbody>' + salida + '</tbody></table>';
 }
 
-// ----------------------------Comparador de Fechas del lado del Servidor -------------------------------------------
+//---------- Comparador de Fechas del lado del Servidor -------------------------------------------
 function DateCompare(A) {
 	var D0 = __EFGetElementByEFFieldName('date_0').value; //Fecha sistema ENG
 	var D1 = __EFGetElementByEFFieldName('date_1').value; //Fecha sistema ESP
 	var D2 = __EFGetElementByEFFieldName('date_2').value; //Fecha sistema ESP
-        var D3 = __EFGetElementByEFFieldName('date_3').value; //Fecha sistema ESP
+	    var D3 = __EFGetElementByEFFieldName('date_3').value; //Fecha sistema ESP
 	var fecha0 = new Date(D0.substring(6, 10) + '/' + (D0.substring(3, 5)) + '/' + D0.substring(0, 2));
 	var fecha1 = new Date(D1.substring(6, 10) + '/' + (D1.substring(3, 5)) + '/' + D1.substring(0, 2));
 	var fecha2 = new Date(D2.substring(6, 10) + '/' + (D2.substring(3, 5)) + '/' + D2.substring(0, 2));
@@ -426,12 +416,12 @@ function DateCompare(A) {
 	}
 }
 
-// ----------------------------Reemplaza punto por coma decimal ---------------------------------
+//---------- Reemplaza punto por coma decimal ---------------------------------
 function ReplaceDecimal(A) {
 	__EFGetElementByEFFieldName(A.getAttribute('effieldname')).value = __EFGetElementByEFFieldName(A.getAttribute('effieldname')).value.replace('.', ',');
 }
 
-// ----------------------------Completa con ceros la OC -----------------------------------------
+//---------- Completa con ceros la OC -----------------------------------------
 function CompleteOC() {
 	var OC = __EFGetElementByEFFieldName('OC').value;
 	var cero = '';
@@ -444,14 +434,12 @@ function CompleteOC() {
 	__EFGetElementByEFFieldName('OC').value = cero + OC;
 }
 
-// ----------------------------Procesa el análisis comparativo -----------------------------------
+//---------- Procesa el análisis comparativo -----------------------------------
 function Process(A) {
 	__EFGetElementByEFFieldName('analysis').value = A;
 }
 
-// ----------------------------Selección de ganador ---------------------------------------
+//---------- Selección de ganador ---------------------------------------
 function WinnerSelect(A) {
 	__EFGetElementByEFFieldName('WinnerMail').value = __EFGetElementByEFFieldName('ProvC4F_' + A).value;
 }
-
-//alert("fin");
