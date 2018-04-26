@@ -55,7 +55,7 @@ if ('[STATENAME]' != 'Comprador' && '[STATENAME]' != 'ADMComprador') {
 //---------- Llenado de HTML productos  ------------------------------------------------------------------------------
 	for (i = 1; i < 6; i++) {
 		cadena = __EFGetElementByEFFieldName('ProdC2F_' + i).value;
-		if ('[STATENAME]' == 'Cotizacion' || '[STATENAME]' == 'CotizacionAmpliada') {
+		if (('[STATENAME]' == 'Cotizacion' && '[FORM:Enlarge]' == '2') || '[STATENAME]' == 'CotizacionAmpliada') {
 			__EFGetElementByEFFieldName('PriceC0F_' + i).value = '';
 			__EFGetElementByEFFieldName('PriceC0F_' + i).disabled = true;
 			if (cadena == '') {
@@ -77,7 +77,7 @@ if ('[STATENAME]' != 'Comprador' && '[STATENAME]' != 'ADMComprador') {
 //---------- Llenado de HTML proveedores  ------------------------------------------------------------------------------
 	for (i = 1; i < 6; i++) {
 		cadena = __EFGetElementByEFFieldName('ProvC2F_' + i).value;
-		if ('[STATENAME]' == 'Cotizacion' || '[STATENAME]' == 'CotizacionAmpliada') {
+		if (('[STATENAME]' == 'Cotizacion' && '[FORM:Enlarge]' == '2') || '[STATENAME]' == 'CotizacionAmpliada') {
 			if (cadena == '') {
 				for (j = 1; j < 9; j++) {
 					__EFGetElementByEFFieldName('PriceC' + i + 'F_' + j).value = '';
@@ -162,17 +162,6 @@ if ('[STATENAME]' != 'Comprador' && '[STATENAME]' != 'ADMComprador') {
 	}
 }
 
-//---------- Solicitud de locación ---------------------------------------------------------------------
-if(__EFGetElementByEFFieldName("PurchaseType").value == "1"){
-	if(__EFGetElementByEFFieldName("Delivery").value == ""){
-		__EFGetElementByEFFieldName("Delivery").value = "Av. San Andrés 6100, Urb. Industrial Molitalia, Los Olivos.";
-		//https://goo.gl/maps/o15DoWLCPg62
-	}
-}
-else{
-__EFGetElementByEFFieldName("Delivery").value = "";
-}
-
 //---------- Validación de etiquetas ---------------------------------------------------------------------
 var ProvidrUniq = __EFGetElementByEFFieldName("UniqueProvider");
 var FchaEnlarge = __EFGetElementByEFFieldName("Enlarge");
@@ -200,7 +189,7 @@ __EFGetElementByEFFieldName("EtiqType").value = comboLbl3[posLbl3].text;
 }
 
 //---------- Extracción de nombre de OC ---------------------------------------------------------------------
-if ('[STATENAME]' == 'Cotización' || '[STATENAME]' == 'SubgerenciaADM' || __EFGetElementByEFFieldName('PurchaseType').value == "3"){
+if ('[STATENAME]' == 'Cotizacion' || '[STATENAME]' == 'CotizacionAmpliada' || '[STATENAME]' == 'SubgerenciaADM' || __EFGetElementByEFFieldName('PurchaseType').value == "3"){
 	var fu1 = '[FORM:file_1]';
 	var oc = __EFGetElementByEFFieldName('OC').value;
 	if(fu1 != "" && oc == ""){
@@ -209,6 +198,24 @@ if ('[STATENAME]' == 'Cotización' || '[STATENAME]' == 'SubgerenciaADM' || __EFG
 }
 
 //---------- Llamado a funciones  ------------------------------------------------------------------------------
+if(__EFGetElementByEFFieldName('WinnerAux').value != "") {
+	__EFGetElementByEFFieldName('WinnerMail').value = __EFGetElementByEFFieldName('ProvC4F_' + __EFGetElementByEFFieldName('WinnerAux').value).value;
+	alert(__EFGetElementByEFFieldName("WinnerSelect")[(__EFGetElementByEFFieldName('WinnerAux').value - 1)].checked);
+}
+alert("winner");
+
+//---------- Solicitud de locación ---------------------------------------------------------------------
+function Location(){
+	if(__EFGetElementByEFFieldName("PurchaseType").value == "1"){
+		if(__EFGetElementByEFFieldName("Delivery").value == ""){
+			__EFGetElementByEFFieldName("Delivery").value = "Av. San Andrés 6100, Urb. Industrial Molitalia, Los Olivos.";
+			//https://goo.gl/maps/o15DoWLCPg62
+		}
+	}
+	else{
+	__EFGetElementByEFFieldName("Delivery").value = "";
+	}
+}
 
 //---------- Concatenación de reglas ---------------------------------------------------------------------
 function CollectorRules() {
@@ -231,7 +238,7 @@ function CollectorRules() {
 			}
 		}
 	}
-	__EFGetElementByEFFieldName('CheckTotal').value = '<table><tbody>' + incoterm + acumulado + '<tr><td width=\'20\'></td><td><li></li></td><td style=\'text-align:left;vertical-align:top;padding:0\'>La fecha de entrega o ejecución debe ser el [FORM:date_3]</td></tr></tbody></table>';
+	__EFGetElementByEFFieldName('CheckTotal').value = '<table><tbody>' + incoterm + acumulado + '<tr><td width=\'20\'></td><td><li></li></td><td style=\'text-align:left;vertical-align:top;padding:0\'>La fecha de entrega o ejecución debe ser el [FORM:date_4]</td></tr></tbody></table>';
 }
 
 //---------- Acciones de Presupuesto -----------------------------------------
@@ -361,16 +368,17 @@ function CollectorProviders() {
 
 //---------- Comparador de Fechas del lado del Servidor -------------------------------------------
 function DateCompare(A) {
-	var D0 = __EFGetElementByEFFieldName('date_0').value; //Fecha sistema ENG
+	var D0 = __EFGetElementByEFFieldName('date_0').value; //Fecha server ENG
 	var D1 = __EFGetElementByEFFieldName('date_1').value; //Fecha sistema ESP
 	var D2 = __EFGetElementByEFFieldName('date_2').value; //Fecha sistema ESP
-	    var D3 = __EFGetElementByEFFieldName('date_3').value; //Fecha sistema ESP
+	var D3 = __EFGetElementByEFFieldName('date_3').value; //Fecha sistema ESP
+	var D4 = __EFGetElementByEFFieldName('date_4').value; //Fecha sistema ESP
 	var fecha0 = new Date(D0.substring(6, 10) + '/' + (D0.substring(3, 5)) + '/' + D0.substring(0, 2));
 	var fecha1 = new Date(D1.substring(6, 10) + '/' + (D1.substring(3, 5)) + '/' + D1.substring(0, 2));
 	var fecha2 = new Date(D2.substring(6, 10) + '/' + (D2.substring(3, 5)) + '/' + D2.substring(0, 2));
 	var fecha3 = new Date(D3.substring(6, 10) + '/' + (D3.substring(3, 5)) + '/' + D3.substring(0, 2));
+	var fecha4 = new Date(D4.substring(6, 10) + '/' + (D4.substring(3, 5)) + '/' + D4.substring(0, 2));
 	var aux = A;
-
 	if (fecha1 < fecha0) {
 		alert('La fecha INICIAL no puede ser menor que la fecha ACTUAL');
 		__EFGetElementByEFFieldName('date_1').value = '';
@@ -399,14 +407,29 @@ function DateCompare(A) {
 			__EFGetElementByEFFieldName('date_2').value = '';
 		}
 	}
-	if (fecha2 > fecha3) {
+	if (fecha2 > fecha4) {
 	alert('La fecha de ENTREGA no puede ser menor que la fecha FINAL');
+		if (A == 4) {
+			__EFGetElementByEFFieldName('date_4').value = '';
+		}
+	}
+	if (fecha4 - fecha2 == 0 || fecha4 - fecha2 == 1) {
+		alert('La fecha de ENTREGA debe tener al menos 1 día calendario de diferencia.');
+		if (A == 2) {
+			__EFGetElementByEFFieldName('date_2').value = '';
+		}
+		if (A == 4) {
+			__EFGetElementByEFFieldName('date_4').value = '';
+		}
+	}
+	if (fecha2 > fecha3) {
+	alert('La fecha de AMPLIACION no puede ser menor que la fecha FINAL');
 		if (A == 3) {
 			__EFGetElementByEFFieldName('date_3').value = '';
 		}
 	}
 	if (fecha3 - fecha2 == 0 || fecha3 - fecha2 == 1) {
-		alert('La fecha de entrega debe tener al menos 1 día calendario de diferencia.');
+		alert('La fecha de AMPLIACION debe tener al menos 1 día calendario de diferencia.');
 		if (A == 2) {
 			__EFGetElementByEFFieldName('date_2').value = '';
 		}
@@ -414,6 +437,7 @@ function DateCompare(A) {
 			__EFGetElementByEFFieldName('date_3').value = '';
 		}
 	}
+
 }
 
 //---------- Reemplaza punto por coma decimal ---------------------------------
@@ -441,5 +465,9 @@ function Process(A) {
 
 //---------- Selección de ganador ---------------------------------------
 function WinnerSelect(A) {
-	__EFGetElementByEFFieldName('WinnerMail').value = __EFGetElementByEFFieldName('ProvC4F_' + A).value;
+	if(A != "" && A != __EFGetElementByEFFieldName('WinnerAux').value) {
+		__EFGetElementByEFFieldName('WinnerAux').value = A;
+		__EFGetElementByEFFieldName('WinnerMail').value = __EFGetElementByEFFieldName('ProvC4F_' + A).value;
+	}
 }
+alert('LastStep');
