@@ -53,7 +53,7 @@ if ('[STATENAME]' == 'Comprador' || '[STATENAME]' == 'ADMComprador') {
 
 if ('[STATENAME]' != 'Comprador' && '[STATENAME]' != 'ADMComprador') {
 //---------- Llenado de HTML productos  ------------------------------------------------------------------------------
-	for (i = 1; i < 6; i++) {
+	for (i = 1; i < 7; i++) {
 		cadena = __EFGetElementByEFFieldName('ProdC2F_' + i).value;
 		if (('[STATENAME]' == 'Cotizacion' && '[FORM:Enlarge]' == '2') || '[STATENAME]' == 'CotizacionAmpliada') {
 			__EFGetElementByEFFieldName('PriceC0F_' + i).value = '';
@@ -79,7 +79,7 @@ if ('[STATENAME]' != 'Comprador' && '[STATENAME]' != 'ADMComprador') {
 		cadena = __EFGetElementByEFFieldName('ProvC2F_' + i).value;
 		if (('[STATENAME]' == 'Cotizacion' && '[FORM:Enlarge]' == '2') || '[STATENAME]' == 'CotizacionAmpliada') {
 			if (cadena == '') {
-				for (j = 1; j < 9; j++) {
+				for (j = 1; j < 10; j++) {
 					__EFGetElementByEFFieldName('PriceC' + i + 'F_' + j).value = '';
 					__EFGetElementByEFFieldName('PriceC' + i + 'F_' + j).disabled = true;
 				}
@@ -96,11 +96,11 @@ if ('[STATENAME]' != 'Comprador' && '[STATENAME]' != 'ADMComprador') {
 	if (__EFGetElementByEFFieldName('analysis').value == '1') {
 		cambio = __EFGetElementByEFFieldName('cambio').value.replace(',', '.');
 		var Total = new Array();
-		for (i = 1; i < 9; i++) {
+		for (i = 1; i < 10; i++) {
 			var Analisis = new Array();
 			var SubTotal = new Array();
 			var x = 0;
-			if (i > 5) {
+			if (i > 6) {
 				x = 1;
 			}
 			for (j = x; j < 6; j++) {
@@ -139,7 +139,7 @@ if ('[STATENAME]' != 'Comprador' && '[STATENAME]' != 'ADMComprador') {
 			}
 			var min = Math.min.apply(null, Analisis.filter(function (n) {return !isNaN(n);}));
 			var max = Math.max.apply(null, Analisis.filter(function (n) {return !isNaN(n);}));
-			if (i != 7) {
+			if (i != 8) {
 				comparar = min;
 			} else {
 				comparar = max;
@@ -149,12 +149,12 @@ if ('[STATENAME]' != 'Comprador' && '[STATENAME]' != 'ADMComprador') {
 					document.getElementById('ResultC' + (k + 1) + 'F_' + i).style.color = '#1172CA';
 					document.getElementById('ResultC' + (k + 1) + 'F_' + i).style.fontWeight = 'bold';
 				}
-				if (i == 8 && Total[k] != undefined) {
+				if (i == 9 && Total[k] != undefined) {
 					var minTotal = Math.min.apply(null, Total);
-					document.getElementById('ResultC' + (k + 1) + 'F_9').innerHTML = '$ ' + parseFloat(Math.round(Total[k] * 100) / 100).toFixed(2);
-					document.getElementById('ResultC' + (k + 1) + 'F_9').style.fontWeight = 'bold';
+					document.getElementById('ResultC' + (k + 1) + 'F_10').innerHTML = '$ ' + parseFloat(Math.round(Total[k] * 100) / 100).toFixed(2);
+					document.getElementById('ResultC' + (k + 1) + 'F_10').style.fontWeight = 'bold';
 					if (Total[k] == minTotal) {
-						document.getElementById('ResultC' + (k + 1) + 'F_9').style.color = '#1172CA';
+						document.getElementById('ResultC' + (k + 1) + 'F_10').style.color = '#1172CA';
 					}
 				}
 			}
@@ -173,19 +173,19 @@ var posLbl2 = comboLbl2.selectedIndex;
 var posLbl3 = comboLbl3.selectedIndex;
 
 if(ProvidrUniq[0].checked){
-__EFGetElementByEFFieldName("EtiqProvider1").value = "SI";
+	__EFGetElementByEFFieldName("EtiqProvider1").value = "SI";
 }
 if(ProvidrUniq[1].checked){
-__EFGetElementByEFFieldName("EtiqProvider1").value = "NO";
+	__EFGetElementByEFFieldName("EtiqProvider1").value = "NO";
 }
 if(FchaEnlarge[0].checked){
-__EFGetElementByEFFieldName("EtiqEnlarge").value = "SI";
+	__EFGetElementByEFFieldName("EtiqEnlarge").value = "SI";
 }
 if(FchaEnlarge[1].checked){
-__EFGetElementByEFFieldName("EtiqEnlarge").value = "NO";
-__EFGetElementByEFFieldName("EtiqPresupuesto").value = comboLbl1[posLbl1].text;
-__EFGetElementByEFFieldName("EtiqProyect").value = comboLbl2[posLbl2].text;
-__EFGetElementByEFFieldName("EtiqType").value = comboLbl3[posLbl3].text;
+	__EFGetElementByEFFieldName("EtiqEnlarge").value = "NO";
+	__EFGetElementByEFFieldName("EtiqPresupuesto").value = comboLbl1[posLbl1].text;
+	__EFGetElementByEFFieldName("EtiqProyect").value = comboLbl2[posLbl2].text;
+	__EFGetElementByEFFieldName("EtiqType").value = comboLbl3[posLbl3].text;
 }
 
 //---------- Extracción de nombre de OC ---------------------------------------------------------------------
@@ -200,20 +200,17 @@ if ('[STATENAME]' == 'Cotizacion' || '[STATENAME]' == 'CotizacionAmpliada' || '[
 //---------- Llamado a funciones  ------------------------------------------------------------------------------
 if(__EFGetElementByEFFieldName('WinnerAux').value != "") {
 	__EFGetElementByEFFieldName('WinnerMail').value = __EFGetElementByEFFieldName('ProvC4F_' + __EFGetElementByEFFieldName('WinnerAux').value).value;
-	alert(__EFGetElementByEFFieldName("WinnerSelect")[(__EFGetElementByEFFieldName('WinnerAux').value - 1)].checked);
+	//alert(__EFGetElementByEFFieldName("WinnerSelect")[(__EFGetElementByEFFieldName('WinnerAux').value - 1)].checked);
 }
 alert("winner");
 
 //---------- Solicitud de locación ---------------------------------------------------------------------
-function Location(){
-	if(__EFGetElementByEFFieldName("PurchaseType").value == "1"){
-		if(__EFGetElementByEFFieldName("Delivery").value == ""){
-			__EFGetElementByEFFieldName("Delivery").value = "Av. San Andrés 6100, Urb. Industrial Molitalia, Los Olivos.";
-			//https://goo.gl/maps/o15DoWLCPg62
-		}
+function Location(A){
+	if(A == 1){
+		__EFGetElementByEFFieldName("Delivery").value = "Av. San Andrés 6100, Urb. Industrial Molitalia, Los Olivos.";
 	}
 	else{
-	__EFGetElementByEFFieldName("Delivery").value = "";
+		__EFGetElementByEFFieldName("Delivery").value = "";
 	}
 }
 
@@ -265,12 +262,12 @@ function ResetBuyer() {
 //---------- Acciones de productos ------------------------------------------------------------------
 function AddRowProduct() {
 	var i, j, k = 0;
-	var B = new Array(5);
-	for (i = 0; i < 5; i++) {
+	var B = new Array(6);
+	for (i = 0; i < 6; i++) {
 		B[i] = __EFGetElementByEFFieldName('ProdC1F_' + (i + 1)).value;
 	}
 	if (__EFGetElementByEFFieldName('SelectProduct').value != '') {
-		for (i = 0; i < 5; i++) {
+		for (i = 0; i < 6; i++) {
 			if (B[i] == '' && k == 0) {
 				for (j = 0; j < i; j++) {
 					if (__EFGetElementByEFFieldName('SelectProduct').value == B[j]) {
@@ -280,7 +277,7 @@ function AddRowProduct() {
 				}
 				if (k == 0) {
 					__EFGetElementByEFFieldName('ProdC1F_' + (i + 1)).value = __EFGetElementByEFFieldName('SelectProduct').value;
-					i = 5;
+					i = 6;
 				}
 			}
 		}
@@ -288,7 +285,7 @@ function AddRowProduct() {
 }
 
 function DelRowProduct(B) {
-	for (i = 1; i < 6; i++) {
+	for (i = 1; i < 7; i++) {
 		__EFGetElementByEFFieldName('ProdC' + i + 'F_' + B).value = '';
 	}
 }
@@ -297,7 +294,7 @@ function DelRowProduct(B) {
 function CollectorProducts() {
 	var salida = '';
 	var acumulado = '';
-	for (var i = 1; i < 6; i++) {
+	for (var i = 1; i < 7; i++) {
 		if (__EFGetElementByEFFieldName('ProdC1F_' + i).value != '') {
 			salida = salida + '<tr><td width=\'20\'></td><td><li></li></td>';
 			for (var j = 1; j < 6; j++) {
