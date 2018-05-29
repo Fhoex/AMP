@@ -202,7 +202,7 @@ if(__EFGetElementByEFFieldName('WinnerAux').value != "") {
 	__EFGetElementByEFFieldName('WinnerMail').value = __EFGetElementByEFFieldName('ProvC4F_' + __EFGetElementByEFFieldName('WinnerAux').value).value;
 	//alert(__EFGetElementByEFFieldName("WinnerSelect")[(__EFGetElementByEFFieldName('WinnerAux').value - 1)].checked);
 }
-alert("winner");
+//alert("winner");
 
 //---------- Solicitud de locación ---------------------------------------------------------------------
 function Location(A){
@@ -465,6 +465,8 @@ function WinnerSelect(A) {
 	if(A != "" && A != __EFGetElementByEFFieldName('WinnerAux').value) {
 		__EFGetElementByEFFieldName('WinnerAux').value = A;
 		__EFGetElementByEFFieldName('WinnerMail').value = __EFGetElementByEFFieldName('ProvC4F_' + A).value;
+		__EFGetElementByEFFieldName('WinnerProvider').value = __EFGetElementByEFFieldName('ProvC2F_' + A).value;
+		__EFGetElementByEFFieldName('WinnerAmount').value = document.getElementById('ResultC' + A + 'F_10').innerHTML;
 	}
 }
-alert('LastStep');
+//alert('LastStep');
