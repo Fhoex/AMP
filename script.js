@@ -133,6 +133,10 @@ if ('[STATENAME]' != 'Comprador' && '[STATENAME]' != 'ADMComprador') {
 					}
 					if (j > 0 && x == 1 && i == 8) {
 						Analisis[j - 1] = valor;
+						document.getElementById('ResultC' + j + 'F_' + i).innerHTML = valor + ' días';
+					}
+					if (j > 0 && x == 1 && i == 9) {
+						Analisis[j - 1] = valor;
 						document.getElementById('ResultC' + j + 'F_' + i).innerHTML = valor + ' %';
 					}
 				}
@@ -465,6 +469,7 @@ function WinnerSelect(A) {
 	if(A != "" && A != __EFGetElementByEFFieldName('WinnerAux').value) {
 		__EFGetElementByEFFieldName('WinnerAux').value = A;
 		__EFGetElementByEFFieldName('WinnerMail').value = __EFGetElementByEFFieldName('ProvC4F_' + A).value;
+		//__EFGetElementByEFFieldName('WinnerProvider').value = __EFGetElementByEFFieldName('ProvC2F_' + A).value.replace(/ /g, "_");
 		__EFGetElementByEFFieldName('WinnerProvider').value = __EFGetElementByEFFieldName('ProvC2F_' + A).value;
 		__EFGetElementByEFFieldName('WinnerAmount').value = document.getElementById('ResultC' + A + 'F_10').innerHTML;
 	}
